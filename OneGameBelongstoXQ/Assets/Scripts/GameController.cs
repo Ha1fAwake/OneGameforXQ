@@ -1,20 +1,38 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class Controller : MonoBehaviour
+using UnityEngine.SceneManagement;
+/// <summary>
+/// 祝薛芹生日快乐！—— 来自wxx的祝福
+/// </summary>
+public class GameController : MonoBehaviour
 {
     public float jumpForce;
     public float walkForce;
     public AudioClip cantStart;
+    public GameObject controlBoard;
+    public static bool start = false;
 
     private GameObject player;
     private GameObject reward;
-    private bool start = false;
+
+    public void OpenControlBoard()
+    {
+        if (controlBoard.activeInHierarchy == false)
+            controlBoard.SetActive(true);
+    }
 
     public void OnExit()
     {
         Application.Quit();
+    }
+
+    public void OnReplay()
+    {
+        SceneManager.LoadScene(0);
+        if (controlBoard.activeInHierarchy == true)
+            controlBoard.SetActive(false);
+        start = false;
     }
 
     public void OnJump()
@@ -22,9 +40,9 @@ public class Controller : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         reward = GameObject.FindGameObjectWithTag("Reward");
 
-        if (player == null && reward == null)
+        if (player == null || reward == null)
         {
-            AudioSource.PlayClipAtPoint(cantStart, transform.position);
+            //AudioSource.PlayClipAtPoint(cantStart, transform.position);
         }
 
         if (player!= null && reward != null)
@@ -40,7 +58,9 @@ public class Controller : MonoBehaviour
                 start = true;
             }
             else
-                player.GetComponent<Rigidbody2D>().AddForce(new Vector2(0, jumpForce));
+            {
+                player.GetComponent<Rigidbody2D>().AddForce(new Vector2(0, jumpForce * 100));
+            }
         }
     }
 
