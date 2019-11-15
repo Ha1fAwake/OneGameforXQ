@@ -33,6 +33,5 @@ public class MyScrollRect : ScrollRect
     {
         // 使用时记得*Time.deltaTime
         output = content.anchoredPosition / limitRadius;
-        Debug.Log(output);
     }
 }

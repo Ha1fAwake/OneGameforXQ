@@ -12,14 +12,23 @@ public class GameController : MonoBehaviour
     public AudioClip cantStart;
     public GameObject controlBoard;
     public static bool start = false;
+    public GameObject itemsBoard;
 
     private GameObject player;
     private GameObject reward;
 
+    private void Start()
+    {
+        Time.timeScale = 0;
+    }
+
     public void OpenControlBoard()
     {
-        if (controlBoard.activeInHierarchy == false)
-            controlBoard.SetActive(true);
+        // 开关原理
+        controlBoard.SetActive(!controlBoard.activeInHierarchy);
+
+        if (itemsBoard.activeInHierarchy)   // 此键关闭物品栏
+            itemsBoard.SetActive(false);
     }
 
     public void OnExit()
@@ -28,51 +37,33 @@ public class GameController : MonoBehaviour
     }
 
     public void OnReplay()
-    {
+    {// 所有重置设置
         SceneManager.LoadScene(0);
         if (controlBoard.activeInHierarchy == true)
             controlBoard.SetActive(false);
         start = false;
     }
 
-    public void OnJump()
+    public void OnStart()
     {
         player = GameObject.FindGameObjectWithTag("Player");
         reward = GameObject.FindGameObjectWithTag("Reward");
 
         if (player == null || reward == null)
         {
-            //AudioSource.PlayClipAtPoint(cantStart, transform.position);
+            AudioSource.PlayClipAtPoint(cantStart, transform.position);
         }
 
-        if (player!= null && reward != null)
+        if (player != null && reward != null)
         {
             start = true;
-        }
-
-        if (start)
-        {
-            if (player.GetComponent<Rigidbody2D>() == null)
-            {
-                player.AddComponent<Rigidbody2D>();
-                start = true;
-            }
-            else
-            {
-                player.GetComponent<Rigidbody2D>().AddForce(new Vector2(0, jumpForce * 100));
-            }
+            Time.timeScale = 1;
         }
     }
 
-    public void OnLeft()
+    public void OnOpenItems()
     {
-        if (start)
-            player.GetComponent<Rigidbody2D>().AddForce(new Vector2(-walkForce, 0));
-    }
-    
-    public void OnRight()
-    {
-        if (start)
-            player.GetComponent<Rigidbody2D>().AddForce(new Vector2(walkForce, 0));
+        if (!itemsBoard.activeInHierarchy)      // 此键打开物品栏
+            itemsBoard.SetActive(true);
     }
 }
