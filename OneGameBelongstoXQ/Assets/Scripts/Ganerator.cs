@@ -14,6 +14,8 @@ public class Ganerator : MonoBehaviour
     // 用CompositeCollider2D不能实现需要的效果
     public Collider2D boardA;       // 可生成物体的水平范围
     public Collider2D boardB;       // 可生成物体的垂直范围
+    public GameObject controlBoard;
+    public GameObject itemsBoard;
 
     private int timer = 0;                  // 触屏次数
     private int timeToGeneratePlayer = 2;   // 生成玩家的时机
@@ -37,7 +39,8 @@ public class Ganerator : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0) && !GameController.start)
+        // 按键 且 游戏未开始 且 没有出现面板
+        if (Input.GetMouseButtonDown(0) && !GameController.start && !controlBoard.activeInHierarchy && !itemsBoard.activeInHierarchy)
         {
             // 确定范围边界
             generatePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
