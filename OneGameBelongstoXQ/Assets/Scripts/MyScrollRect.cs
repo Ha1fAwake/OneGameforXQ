@@ -29,6 +29,12 @@ public class MyScrollRect : ScrollRect
         }
     }
 
+    public override void OnEndDrag(PointerEventData eventData)
+    {
+        base.OnEndDrag(eventData);
+        SetContentAnchoredPosition(new Vector2(0, 0));
+    }
+
     private void Update()
     {
         // 使用时记得*Time.deltaTime
