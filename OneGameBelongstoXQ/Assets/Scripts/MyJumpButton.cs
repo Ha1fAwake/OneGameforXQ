@@ -19,12 +19,14 @@ public class MyJumpButton : Button
     public override void OnPointerDown(PointerEventData eventData)
     {
         base.OnPointerDown(eventData);
-        isDown = true;
+        if (GetComponentInChildren<Text>().text == "Q")
+            isDown = true;
     }
 
     public override void OnPointerUp(PointerEventData eventData)
     {
         base.OnPointerUp(eventData);
-        isDown = false;
+        if (GetComponentInChildren<Text>().text == "Q")
+            isDown = false;
     }
 }

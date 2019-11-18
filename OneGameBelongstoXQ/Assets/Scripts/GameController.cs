@@ -17,9 +17,10 @@ public class GameController : MonoBehaviour
     private GameObject player;
     private GameObject reward;
 
-    private void Start()
+    private void Awake()
     {
         Time.timeScale = 0;
+        start = false;
     }
 
     public void OpenControlBoard()

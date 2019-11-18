@@ -2561,7 +2561,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: S
+  m_Text: Q
 --- !u!222 &1116157768
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3810,16 +3810,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8842272356399432034, guid: bb65e47f1cb5408468ae59146636c1a0,
-        type: 3}
-      propertyPath: maxSpeed
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8842272356399432034, guid: bb65e47f1cb5408468ae59146636c1a0,
-        type: 3}
-      propertyPath: moveForce
-      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bb65e47f1cb5408468ae59146636c1a0, type: 3}

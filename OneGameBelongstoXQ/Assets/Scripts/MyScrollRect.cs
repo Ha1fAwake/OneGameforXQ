@@ -31,7 +31,7 @@ public class MyScrollRect : ScrollRect
 
     public override void OnEndDrag(PointerEventData eventData)
     {
-        base.OnEndDrag(eventData);
+        //base.OnEndDrag(eventData);            // 原来父类的方法才是摇杆惯性的罪魁祸首
         SetContentAnchoredPosition(new Vector2(0, 0));
     }
 
