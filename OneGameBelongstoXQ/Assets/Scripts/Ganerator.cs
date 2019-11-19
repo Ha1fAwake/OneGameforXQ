@@ -9,8 +9,6 @@ public class Ganerator : MonoBehaviour
 {// 在出现奖励前，触碰屏幕随机生成机关。一定触碰次数生成奖励和玩家
     public int minCount = 2;            // 生成玩家和奖励的最小时机
     public int maxCount = 8;            // 生成玩家和奖励的最大时机
-    public int trapNum = 6;             // 陷阱数（在UI显示）
-    public int platformNum = 6;         // 平台数（在Ui显示）
 
     public GameObject[] layouts;        // 陷阱或移动平台
     public GameObject player;           // 玩家
@@ -46,8 +44,8 @@ public class Ganerator : MonoBehaviour
         boundsA = boardA.bounds;
         boundsB = boardB.bounds;
 
-        trapNumText.text = (trapNum - trapCounter).ToString();
-        platformText.text = (platformNum - platformCounter).ToString();
+        trapNumText.text = (GameController.trapNum - trapCounter).ToString();
+        platformText.text = (GameController.platformNum - platformCounter).ToString();
     }
 
     private void Update()
@@ -87,17 +85,17 @@ public class Ganerator : MonoBehaviour
     {
         timer++;        // 生成次数+1
         GameObject toGenerate = null;
-        if (trapCounter < trapNum || platformCounter < platformNum)
+        if (trapCounter < GameController.trapNum || platformCounter < GameController.platformNum)
             toGenerate = layouts[Random.Range(0, layouts.Length)];
-        if (trapCounter == trapNum)
+        if (trapCounter == GameController.trapNum)
             toGenerate = layouts[1];
-        if (platformCounter == platformNum)
+        if (platformCounter == GameController.platformNum)
             toGenerate = layouts[0];
         if (timer == timeToGeneratePlayer)
             toGenerate = player;
         if (timer == timeToGenerateReward)
             toGenerate = reward;
-        if (trapCounter >= trapNum && platformCounter >= platformNum)
+        if (trapCounter >= GameController.trapNum && platformCounter >= GameController.platformNum)
             return;     // 不能继续生成
         Instantiate(toGenerate, generatePosition, Quaternion.identity);
 
@@ -105,12 +103,12 @@ public class Ganerator : MonoBehaviour
         if (toGenerate == layouts[0])
         {
             trapCounter++;
-            trapNumText.text = (trapNum - trapCounter).ToString();
+            trapNumText.text = (GameController.trapNum - trapCounter).ToString();
         }
         if (toGenerate == layouts[1])
         {
             platformCounter++;
-            platformText.text = (platformNum - platformCounter).ToString();
+            platformText.text = (GameController.platformNum - platformCounter).ToString();
         }
     }
 
