@@ -392,7 +392,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 6
+  m_Text: 0
 --- !u!222 &117147018
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1466,7 +1466,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 6
+  m_Text: 0
 --- !u!222 &582964106
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1831,8 +1831,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minCount: 2
   maxCount: 8
-  trapNum: 6
-  platformNum: 6
   layouts:
   - {fileID: 7382203498765357262, guid: 7ccc2f0a31e644e4095afb171694fe1e, type: 3}
   - {fileID: 4105669249114964611, guid: 29eeda5ed590f5743b3b9d93acb9ca4f, type: 3}
@@ -1875,9 +1873,9 @@ MonoBehaviour:
   cantStart: {fileID: 8300000, guid: 929ef62043ddb76439afdfa8a65edb7e, type: 3}
   controlBoard: {fileID: 91630162}
   itemsBoard: {fileID: 1619834219}
-  levelShow: {fileID: 0}
-  trapNumText: {fileID: 0}
-  platformText: {fileID: 0}
+  levelShow: {fileID: 1293895059}
+  trapNumText: {fileID: 117147017}
+  platformText: {fileID: 582964105}
 --- !u!1 &707104060
 GameObject:
   m_ObjectHideFlags: 0
@@ -2568,7 +2566,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: "Level_1\uFF1A11\u670818\u65E5"
+  m_Text: "Level_0\uFF1A11\u6708xx\u65E5"
 --- !u!222 &1293895060
 CanvasRenderer:
   m_ObjectHideFlags: 0
