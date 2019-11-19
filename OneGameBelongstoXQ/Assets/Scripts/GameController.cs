@@ -44,7 +44,6 @@ public class GameController : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(start);
         if (isLevelUp)
             UpdateLevelData();
     }
