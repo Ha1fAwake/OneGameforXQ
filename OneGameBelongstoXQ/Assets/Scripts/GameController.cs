@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+
 /// <summary>
 /// 祝薛芹生日快乐！—— 来自wxx的祝福
 /// </summary>
@@ -14,12 +16,15 @@ public class GameController : MonoBehaviour
     public static bool start = false;
     public GameObject itemsBoard;
 
+    public Text levelShow;
+    public Text trapNumText;
+    public Text platformText;
+
     private GameObject player;
     private GameObject reward;
 
     private void Awake()
     {
-        Time.timeScale = 0;
         start = false;
     }
 
@@ -39,10 +44,9 @@ public class GameController : MonoBehaviour
 
     public void OnReplay()
     {// 所有重置设置
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(1);
         if (controlBoard.activeInHierarchy == true)
             controlBoard.SetActive(false);
-        start = false;
     }
 
     public void OnStart()
@@ -58,7 +62,6 @@ public class GameController : MonoBehaviour
         if (player != null && reward != null)
         {
             start = true;
-            Time.timeScale = 1;
         }
     }
 
@@ -66,5 +69,11 @@ public class GameController : MonoBehaviour
     {
         if (!itemsBoard.activeInHierarchy)      // 此键打开物品栏
             itemsBoard.SetActive(true);
+    }
+
+    private void OnDestroy()
+    {
+        Time.timeScale = 1;
+        start = false;
     }
 }

@@ -9,18 +9,9 @@ public class ReactToStart : MonoBehaviour
 {
     public Flowchart flowchart;
 
-    private Bounds bounds;
-    private Vector2 touchPos;
-
-    private void Start()
+    private void OnMouseDown()
     {
-        bounds = this.GetComponent<CircleCollider2D>().bounds;
-    }
-
-    void Update()
-    {
-        touchPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        if (Input.GetMouseButtonDown(0) && bounds.Contains(touchPos))
+        if (!flowchart.HasExecutingBlocks())
         {
             flowchart.ExecuteBlock("First");
         }

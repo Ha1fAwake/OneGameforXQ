@@ -30,6 +30,13 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        if (!GameController.start)
+        {
+            rgb.bodyType = RigidbodyType2D.Static;
+            return;
+        }
+        rgb.bodyType = RigidbodyType2D.Dynamic;
+
         // 移动
         if (Mathf.Abs(scrollRect.output.x) > 0)
             if (Mathf.Abs(rgb.velocity.x) <= maxSpeed)
@@ -40,7 +47,7 @@ public class PlayerController : MonoBehaviour
         // 跳跃
         if (jumpButton.isDown && !releaseWhenFloat)     // 当跳跃键按下且没有在半空中松开
             if (transform.position.y - currentPositionY <= maxJumpHeight)
-                rgb.velocity = new Vector2(rgb.velocity.x, rgb.velocity.y + jumpIncrement);
+                rgb.velocity = new Vector2(rgb.velocity.x, rgb.velocity.y + jumpIncrement);     // 用AddForce很难实现跳跃的迸发力
 
         if (!isOnPlatform)
             if (!jumpButton.isDown)         // 若在半空中且松开按键

@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-
+/// <summary>
+/// 祝薛芹生日快乐！—— 来自wxx的祝福
+/// </summary>
 public class MyJumpButton : Button
 {
     public bool isDown = false;
