@@ -5,7 +5,7 @@ using UnityEngine.UI;
 /// <summary>
 /// 祝薛芹生日快乐！—— 来自wxx的祝福
 /// </summary>
-public class Ganerator : MonoBehaviour
+public class Generator : MonoBehaviour
 {// 在出现奖励前，触碰屏幕随机生成机关。一定触碰次数生成奖励和玩家
     public int minCount = 2;            // 生成玩家和奖励的最小时机
     public int maxCount = 8;            // 生成玩家和奖励的最大时机

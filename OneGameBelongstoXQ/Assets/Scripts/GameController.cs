@@ -107,6 +107,9 @@ public class GameController : MonoBehaviour
         trapNum = levelData.TrapNum;
         platformNum = levelData.Platform;
 
+        // 更新关卡奖励
+        GetComponent<Generator>().reward = rewardList[levelData.LevelId];
+
         isLevelUp = false;
     }
 
