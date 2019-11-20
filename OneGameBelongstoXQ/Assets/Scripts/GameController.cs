@@ -32,22 +32,28 @@ public class GameController : MonoBehaviour
     private string levelDatas_json;
     private List<LevelData> levelDatas_list = new List<LevelData>();
 
+    private int currentLevelId;
     private bool isLevelUp = true;
 
     // 重新加载场景会调用Awake和Start函数
     private void Awake()
-    {
+    {// 游戏主要逻辑的初始化必须是Awake函数
         start = false;
         isLevelUp = true;
         levelDatas_list.Clear();
         levelDatas_json = File.ReadAllText(Application.dataPath + "/LevelDatas.json");
         levelDatas_list = JsonConvert.DeserializeObject<List<LevelData>>(levelDatas_json);
+        UpdateLevelData();
     }
 
     private void Update()
     {
         if (isLevelUp)
             UpdateLevelData();
+
+        GameObject reward = GameObject.FindGameObjectWithTag("Reward");
+        if (reward != null && reward.GetComponent<LevelUp>().sendLevelUp)
+            LevelUp();
     }
 
     public void OpenControlBoard()
@@ -106,19 +112,21 @@ public class GameController : MonoBehaviour
         platformText.text = levelData.Platform.ToString();
         trapNum = levelData.TrapNum;
         platformNum = levelData.Platform;
-
+        currentLevelId = levelData.LevelId;
         // 更新关卡奖励
-        GetComponent<Generator>().reward = rewardList[levelData.LevelId];
-
+        GetComponent<Generator>().reward = rewardList[levelData.LevelId - 1];   // levelID比列表下标多1位
         isLevelUp = false;
     }
 
     private void LevelUp()
-    {// 升级，同时更新json文件
+    {// 升级
+        Debug.Log("Level Up");
+        // 更新json文件
         levelDatas_list[0].CurrentLevel++;
         levelDatas_json = JsonConvert.SerializeObject(levelDatas_list, Formatting.Indented);
         File.WriteAllText(Application.dataPath + "/LevelDatas.json", levelDatas_json);
-        isLevelUp = true;
+        // 重新加载场景
+        SceneManager.LoadScene(1);
     }
 }
 

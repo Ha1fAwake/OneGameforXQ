@@ -1184,7 +1184,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 0b6d30e34b1fd7e44846ddb4c819fe77, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.3
+  m_Volume: 0.2
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -1278,7 +1278,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.8313726, g: 0.882353, b: 0.86274517, a: 0}
+  m_BackGroundColor: {r: 0.7607844, g: 0.7607844, b: 0.7607844, a: 1}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -1876,6 +1876,13 @@ MonoBehaviour:
   levelShow: {fileID: 1293895059}
   trapNumText: {fileID: 117147017}
   platformText: {fileID: 582964105}
+  rewardList:
+  - {fileID: 5099756027307436431, guid: caf508036b4ad8c49ac199cadcdfae22, type: 3}
+  - {fileID: 5099756027307436431, guid: 2de7b6557f4f85f4898fece81560c5d3, type: 3}
+  - {fileID: 5099756027307436431, guid: dc337ffcae21c0340b20bb047ce154af, type: 3}
+  - {fileID: 5099756027307436431, guid: ca7eae96462ed5a4790abacd1828a666, type: 3}
+  - {fileID: 5099756027307436431, guid: c0a000926f08ec84680fc0a4c5ae6b70, type: 3}
+  - {fileID: 5099756027307436431, guid: 011f4659cf9ccfd49a20d57c05be0380, type: 3}
 --- !u!1 &707104060
 GameObject:
   m_ObjectHideFlags: 0
@@ -2489,7 +2496,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: S
+  m_Text: Q
 --- !u!222 &1116157768
 CanvasRenderer:
   m_ObjectHideFlags: 0

@@ -7,8 +7,6 @@ using UnityEngine.UI;
 /// </summary>
 public class Generator : MonoBehaviour
 {// 在出现奖励前，触碰屏幕随机生成机关。一定触碰次数生成奖励和玩家
-    public int minCount = 2;            // 生成玩家和奖励的最小时机
-    public int maxCount = 8;            // 生成玩家和奖励的最大时机
 
     public GameObject[] layouts;        // 陷阱或移动平台
     public GameObject player;           // 玩家
@@ -36,6 +34,9 @@ public class Generator : MonoBehaviour
 
     private void Start()
     {
+        int minCount = 1;            // 生成玩家和奖励的最小时机
+        int maxCount = GameController.trapNum + GameController.platformNum;  // 生成玩家和奖励的最大时机
+
         while (timeToGeneratePlayer == timeToGenerateReward)
         {
             timeToGeneratePlayer = Random.Range(minCount, maxCount + 1);
@@ -47,6 +48,10 @@ public class Generator : MonoBehaviour
 
         trapNumText.text = (GameController.trapNum - trapCounter).ToString();
         platformText.text = (GameController.platformNum - platformCounter).ToString();
+
+        //Debug.Log("maxCount " + maxCount);
+        //Debug.Log("timeToGeneratePlayer " + timeToGeneratePlayer);
+        //Debug.Log("timeToGenerateReward " + timeToGenerateReward);
     }
 
     private void Update()
@@ -96,10 +101,14 @@ public class Generator : MonoBehaviour
             toGenerate = player;
         if (timer == timeToGenerateReward)
             toGenerate = reward;
-        if (trapCounter >= GameController.trapNum && platformCounter >= GameController.platformNum)
-            return;     // 不能继续生成
-        Instantiate(toGenerate, generatePosition, Quaternion.identity);
-
+        if (toGenerate == player || toGenerate == reward)
+            Instantiate(toGenerate, generatePosition, Quaternion.identity);
+        if (toGenerate == layouts[0] || toGenerate == layouts[1])
+        {
+            if (trapCounter >= GameController.trapNum && platformCounter >= GameController.platformNum)
+                return;     // 不能继续生成
+            Instantiate(toGenerate, generatePosition, Quaternion.identity);
+        }
         // 在UI显示剩余陷阱和平台的数量
         if (toGenerate == layouts[0])
         {
