@@ -24,6 +24,8 @@ public class GameController : MonoBehaviour
     public Text trapNumText;
     public Text platformText;
 
+    public List<GameObject> rewardList = new List<GameObject>();
+
     private GameObject player;
     private GameObject reward;
 

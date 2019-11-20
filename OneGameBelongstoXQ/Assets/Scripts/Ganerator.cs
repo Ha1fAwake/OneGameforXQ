@@ -12,7 +12,8 @@ public class Ganerator : MonoBehaviour
 
     public GameObject[] layouts;        // 陷阱或移动平台
     public GameObject player;           // 玩家
-    public GameObject reward;           // 奖励
+    [HideInInspector]
+    public GameObject reward;           // 奖励（由GameController根据关卡数决定奖励的内容）
     // 用CompositeCollider2D不能实现需要的效果
     public Collider2D boardA;           // 可生成物体的水平范围
     public Collider2D boardB;           // 可生成物体的垂直范围
