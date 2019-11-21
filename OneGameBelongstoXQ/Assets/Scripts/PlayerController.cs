@@ -64,8 +64,8 @@ public class PlayerController : MonoBehaviour
             if (!jumpButton.isDown)         // 若在半空中且松开按键
                 releaseWhenFloat = true;    // 记录下来
 
-        // 电脑端测试用的键盘移动输入
-        if (Input.GetKey(KeyCode.W))     // 当跳跃键按下且没有在半空中松开
+        // 电脑端测试用的键盘跳跃输入
+        if (Input.GetKey(KeyCode.W) && isOnPlatform)     // 当跳跃键按下且没有在半空中松开
             if (transform.position.y - currentPositionY <= maxJumpHeight / 2)
                 rgb.velocity = new Vector2(rgb.velocity.x, rgb.velocity.y + jumpIncrement);     // 用AddForce很难实现跳跃的迸发力
        
