@@ -19,12 +19,14 @@ public class GameController : MonoBehaviour
     public AudioClip cantStart;
     public GameObject controlBoard;
     public GameObject itemsBoard;
+    public GameObject descriptionPanel;
 
     public Text levelShow;
     public Text trapNumText;
     public Text platformText;
 
     public List<GameObject> rewardList = new List<GameObject>();
+    public List<GameObject> slots = new List<GameObject>();
 
     private GameObject player;
     private GameObject reward;
@@ -97,6 +99,37 @@ public class GameController : MonoBehaviour
     {
         if (!itemsBoard.activeInHierarchy)      // 此键打开物品栏
             itemsBoard.SetActive(true);
+        if (descriptionPanel.activeInHierarchy)
+            descriptionPanel.SetActive(false);
+
+        switch (currentLevelId)
+        {
+            case 2:
+                slots[0].GetComponent<Image>().sprite = rewardList[0].GetComponent<SpriteRenderer>().sprite;
+                break;
+            case 3:
+                slots[0].GetComponent<Image>().sprite = rewardList[0].GetComponent<SpriteRenderer>().sprite;
+                slots[1].GetComponent<Image>().sprite = rewardList[1].GetComponent<SpriteRenderer>().sprite;
+                break;
+            case 4:
+                slots[0].GetComponent<Image>().sprite = rewardList[0].GetComponent<SpriteRenderer>().sprite;
+                slots[1].GetComponent<Image>().sprite = rewardList[1].GetComponent<SpriteRenderer>().sprite;
+                slots[2].GetComponent<Image>().sprite = rewardList[2].GetComponent<SpriteRenderer>().sprite;
+                break;
+            case 5:
+                slots[0].GetComponent<Image>().sprite = rewardList[0].GetComponent<SpriteRenderer>().sprite;
+                slots[1].GetComponent<Image>().sprite = rewardList[1].GetComponent<SpriteRenderer>().sprite;
+                slots[2].GetComponent<Image>().sprite = rewardList[2].GetComponent<SpriteRenderer>().sprite;
+                slots[3].GetComponent<Image>().sprite = rewardList[3].GetComponent<SpriteRenderer>().sprite;
+                break;
+            case 6:
+                slots[0].GetComponent<Image>().sprite = rewardList[0].GetComponent<SpriteRenderer>().sprite;
+                slots[1].GetComponent<Image>().sprite = rewardList[1].GetComponent<SpriteRenderer>().sprite;
+                slots[2].GetComponent<Image>().sprite = rewardList[2].GetComponent<SpriteRenderer>().sprite;
+                slots[3].GetComponent<Image>().sprite = rewardList[3].GetComponent<SpriteRenderer>().sprite;
+                slots[4].GetComponent<Image>().sprite = rewardList[4].GetComponent<SpriteRenderer>().sprite;
+                break;
+        }
     }
 
     private void UpdateLevelData()
