@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5099756027307436425}
   - component: {fileID: 5099756027307436430}
   - component: {fileID: 1515432676876796354}
-  - component: {fileID: 8590760691774331747}
+  - component: {fileID: 655099241025595570}
   m_Layer: 8
   m_Name: Cake
   m_TagString: Reward
@@ -99,7 +99,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 1.4
---- !u!114 &8590760691774331747
+--- !u!114 &655099241025595570
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -108,11 +108,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 5099756027307436431}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 618a3d5b734a83142a577a944e3c0d04, type: 3}
+  m_Script: {fileID: 11500000, guid: 6be60da0f10397047a5474a11865d941, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sendLevelUp: 0
-  reward: {fileID: 8300000, guid: 1662b12e94b1c3646a61d9ce71372bd2, type: 3}
+  gameClear: {fileID: 8300000, guid: 155b6e278e21a4d4d8d2cafd5a145498, type: 3}
 --- !u!1 &6716657577696126235
 GameObject:
   m_ObjectHideFlags: 0

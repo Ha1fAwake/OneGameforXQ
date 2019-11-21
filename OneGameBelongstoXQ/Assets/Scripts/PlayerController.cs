@@ -5,7 +5,7 @@ using UnityEngine;
 /// 祝薛芹生日快乐！—— 来自wxx的祝福
 /// </summary>
 public class PlayerController : MonoBehaviour
-{
+{// 角色（罗小黑）控制器
     public float moveForce = 20f;
     public float maxSpeed = 5f;
     public float jumpForce = 0.1f;
@@ -15,6 +15,9 @@ public class PlayerController : MonoBehaviour
     public AudioClip damage;
     public AudioClip jump;
 
+    [HideInInspector]
+    public bool isDead = false;
+
     private MyScrollRect scrollRect;
     private MyJumpButton jumpButton;
     private Rigidbody2D rgb;
@@ -22,6 +25,7 @@ public class PlayerController : MonoBehaviour
     private bool isOnPlatform = false;
     private bool releaseWhenFloat = false;
     private float currentPositionY;    // 记录跳跃前的高度
+    private bool isLevelup = false;
 
     private void Start()
     {
@@ -38,7 +42,13 @@ public class PlayerController : MonoBehaviour
             rgb.bodyType = RigidbodyType2D.Static;
             return;
         }
-        rgb.bodyType = RigidbodyType2D.Dynamic;
+        if (GameController.start && !isLevelup)
+            rgb.bodyType = RigidbodyType2D.Dynamic;
+        if (isLevelup)
+        {
+            rgb.bodyType = RigidbodyType2D.Static;
+            return;
+        }
 
         // 移动
         if (Mathf.Abs(scrollRect.output.x) > 0)
@@ -65,20 +75,20 @@ public class PlayerController : MonoBehaviour
                 releaseWhenFloat = true;    // 记录下来
 
         // 电脑端测试用的键盘跳跃输入
-        if (Input.GetKey(KeyCode.W) && isOnPlatform)     // 当跳跃键按下且没有在半空中松开
+        if (Input.GetKey(KeyCode.W))     // 当跳跃键按下且没有在半空中松开
             if (transform.position.y - currentPositionY <= maxJumpHeight / 2)
                 rgb.velocity = new Vector2(rgb.velocity.x, rgb.velocity.y + jumpIncrement);     // 用AddForce很难实现跳跃的迸发力
-       
+
         //if (!isOnPlatform)
         //    if (Input.GetKeyUp(KeyCode.W))      // 若在半空中且松开按键
         //        releaseWhenFloat = true;        // 记录下来
-
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Trap")
         {
+            isDead = true;
             Invoke("Replay", 0.2f);
             AudioSource.PlayClipAtPoint(damage, transform.position);
         }
@@ -88,6 +98,11 @@ public class PlayerController : MonoBehaviour
             isOnPlatform = true;
             releaseWhenFloat = false;
             currentPositionY = transform.position.y;
+        }
+
+        if(collision.gameObject.tag=="Reward")
+        {
+            isLevelup = true;
         }
     }
 
@@ -105,5 +120,6 @@ public class PlayerController : MonoBehaviour
     {
         transform.position = startPosition;
         rgb.velocity = Vector2.zero;
+        isDead = false;
     }
 }

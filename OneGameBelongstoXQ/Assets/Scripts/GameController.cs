@@ -11,8 +11,8 @@ using System.IO;
 public class GameController : MonoBehaviour
 {
     public static bool start = false;
-    public static int trapNum;             // 陷阱数（在UI显示）
-    public static int platformNum;         // 平台数（在Ui显示）
+    public int trapNum;             // 陷阱数（在UI显示）
+    public int platformNum;         // 平台数（在Ui显示）
 
     public float jumpForce;
     public float walkForce;
@@ -34,7 +34,7 @@ public class GameController : MonoBehaviour
     private string levelDatas_json;
     private List<LevelData> levelDatas_list = new List<LevelData>();
 
-    private int currentLevelId;
+    public int currentLevelId;
     private bool isLevelUp = true;
     private bool hasAddedMovingPlat = false;
 
@@ -54,9 +54,12 @@ public class GameController : MonoBehaviour
         if (isLevelUp)
             UpdateLevelData();
 
-        GameObject reward = GameObject.FindGameObjectWithTag("Reward");
-        if (reward != null && reward.GetComponent<LevelUp>().sendLevelUp)
-            Invoke("LevelUp", 0.8f);
+        if (currentLevelId < 6)
+        {
+            GameObject reward = GameObject.FindGameObjectWithTag("Reward");
+            if (reward != null && reward.GetComponent<LevelUp>().sendLevelUp)
+                Invoke("LevelUp", 3.1f);
+        }
     }
 
     public void OpenControlBoard()
@@ -166,6 +169,7 @@ public class GameController : MonoBehaviour
         GetComponent<Generator>().reward = rewardList[levelData.LevelId - 1];   // levelID比列表下标多1位
         isLevelUp = false;
         hasAddedMovingPlat = false;
+        Camera.main.GetComponent<AudioSource>().volume = 0.13f;
     }
 
     private void LevelUp()

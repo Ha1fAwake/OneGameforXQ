@@ -10,6 +10,7 @@ public class Generator : MonoBehaviour
 
     public GameObject[] layouts;        // 陷阱或移动平台
     public GameObject player;           // 玩家
+    public GameObject noface;           // 无脸男
     [HideInInspector]
     public GameObject reward;           // 奖励（由GameController根据关卡数决定奖励的内容）
     // 用CompositeCollider2D不能实现需要的效果
@@ -23,8 +24,10 @@ public class Generator : MonoBehaviour
     public AudioClip layout;
 
     private int timer = 0;                  // 触屏次数
-    private int timeToGeneratePlayer = 2;   // 生成玩家的时机
-    private int timeToGenerateReward = 2;   // 生成奖励的时机
+    private int timeToGeneratePlayer = 2;       // 生成玩家的时机
+    private int timeToGenerateReward = 2;       // 生成奖励的时机
+    private int timeToGenerateNoface = 2;       // 生成无脸男的时机
+    private GameController gameController;
     private int trapCounter = 0;            // 陷阱计数器
     private int platformCounter = 0;        // 平台计数器
     private Vector3 generatePosition;       // 生成位置
@@ -36,24 +39,36 @@ public class Generator : MonoBehaviour
 
     private void Start()
     {
+        gameController = GetComponent<GameController>();
+
         int minCount = 1;            // 生成玩家和奖励的最小时机
-        int maxCount = GameController.trapNum + GameController.platformNum;  // 生成玩家和奖励的最大时机
+        int maxCount = gameController.trapNum + gameController.platformNum;  // 生成玩家和奖励的最大时机
 
         while (timeToGeneratePlayer == timeToGenerateReward)
         {
-            timeToGeneratePlayer = Random.Range(minCount, maxCount + 1);
+            timeToGeneratePlayer = Random.Range(minCount, gameController.platformNum + 1);
             timeToGenerateReward = Random.Range(minCount, maxCount + 1);
+        }
+
+        if (gameController.currentLevelId == 6)
+        {
+            while (timeToGenerateNoface == timeToGeneratePlayer || timeToGenerateNoface == timeToGenerateReward)
+            {
+                timeToGenerateNoface = Random.Range(gameController.trapNum, maxCount + 1);
+            }
         }
 
         boundsA = boardA.bounds;
         boundsB = boardB.bounds;
 
-        trapNumText.text = (GameController.trapNum - trapCounter).ToString();
-        platformText.text = (GameController.platformNum - platformCounter).ToString();
+        trapNumText.text = (gameController.trapNum - trapCounter).ToString();
+        platformText.text = (gameController.platformNum - platformCounter).ToString();
 
         //Debug.Log("maxCount " + maxCount);
         //Debug.Log("timeToGeneratePlayer " + timeToGeneratePlayer);
         //Debug.Log("timeToGenerateReward " + timeToGenerateReward);
+        //Debug.Log("timeToGenerateNoface " + timeToGenerateNoface);
+        //Debug.Log(gameController.currentLevelId);
     }
 
     private void Update()
@@ -76,13 +91,7 @@ public class Generator : MonoBehaviour
                     isInsideOthers = true;
             }
 
-            //Collider2D coll = Physics2D.OverlapPoint(generatePosition);
-            //if (coll.name == "Unplaceable")
-            //    isInsideOthers = true;
-            //else
-            //    isInsideOthers = false;
-
-            // 若在生成范围内，可以生成
+            // 若在生成范围内，且不在其他物体的范围内
             if (isInsideBoundA || isInsideBoundB)
                 if(!isInsideOthers)
                     Generate();
@@ -93,24 +102,26 @@ public class Generator : MonoBehaviour
     {
         timer++;        // 生成次数+1
         GameObject toGenerate = null;
-        if (trapCounter < GameController.trapNum || platformCounter < GameController.platformNum)
+        if (trapCounter < gameController.trapNum || platformCounter < gameController.platformNum)
             toGenerate = layouts[Random.Range(0, layouts.Length)];
-        if (trapCounter == GameController.trapNum)
+        if (trapCounter == gameController.trapNum)
             toGenerate = layouts[1];
-        if (platformCounter == GameController.platformNum)
+        if (platformCounter == gameController.platformNum)
             toGenerate = layouts[0];
         if (timer == timeToGeneratePlayer)
             toGenerate = player;
         if (timer == timeToGenerateReward)
             toGenerate = reward;
-        if (toGenerate == player || toGenerate == reward)
+        if (gameController.currentLevelId == 6 && timer == timeToGenerateNoface)
+            toGenerate = noface;
+        if (toGenerate == player || toGenerate == reward || toGenerate == noface)
         {
             Instantiate(toGenerate, generatePosition, Quaternion.identity);
             AudioSource.PlayClipAtPoint(layout, transform.position);
         }
         if (toGenerate == layouts[0] || toGenerate == layouts[1])
         {
-            if (trapCounter >= GameController.trapNum && platformCounter >= GameController.platformNum)
+            if (trapCounter >= gameController.trapNum && platformCounter >= gameController.platformNum)
                 return;     // 不能继续生成
             Instantiate(toGenerate, generatePosition, Quaternion.identity);
             AudioSource.PlayClipAtPoint(layout, transform.position);
@@ -119,28 +130,12 @@ public class Generator : MonoBehaviour
         if (toGenerate == layouts[0])
         {
             trapCounter++;
-            trapNumText.text = (GameController.trapNum - trapCounter).ToString();
+            trapNumText.text = (gameController.trapNum - trapCounter).ToString();
         }
         if (toGenerate == layouts[1])
         {
             platformCounter++;
-            platformText.text = (GameController.platformNum - platformCounter).ToString();
+            platformText.text = (gameController.platformNum - platformCounter).ToString();
         }
     }
-
-    //private bool InsideOtherObject(RaycastHit hit)
-    //{
-    //    if (hit.transform != null)
-    //    {
-    //        if (hit.transform.tag == "Platform" || hit.transform.tag == "Trap")
-    //        {
-    //            Debug.Log("Inside");
-    //            return true;
-    //        }
-    //        else
-    //            return false;
-    //    }
-    //    else
-    //        return false;
-    //}
 }
