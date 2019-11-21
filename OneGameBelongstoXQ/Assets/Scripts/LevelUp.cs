@@ -14,11 +14,6 @@ public class LevelUp : MonoBehaviour
         sendLevelUp = false;
     }
 
-    private void Update()
-    {
-        Debug.Log(sendLevelUp);
-    }
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.collider.tag == "Player")

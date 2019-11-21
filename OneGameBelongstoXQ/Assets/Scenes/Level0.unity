@@ -500,19 +500,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   version: 1
-  scrollPos: {x: 583.0061, y: 148.91924}
+  scrollPos: {x: 289.03104, y: 32.293903}
   variablesScrollPos: {x: 0, y: 0}
   variablesExpanded: 1
   blockViewHeight: 400
-  zoom: 0.9660001
+  zoom: 0.7000003
   scrollViewRect:
     serializedVersion: 2
     x: -343
     y: -340
     width: 1114
     height: 859
-  selectedBlocks:
-  - {fileID: 591513300}
+  selectedBlocks: []
   selectedCommands: []
   variables: []
   description: 
@@ -566,7 +565,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeRect:
     serializedVersion: 2
-    x: 236
+    x: 237.42857
     y: 103
     width: 120
     height: 40
@@ -784,7 +783,7 @@ MonoBehaviour:
   _sceneName:
     stringRef: {fileID: 0}
     stringVal: Levels
-  loadingImage: {fileID: 0}
+  loadingImage: {fileID: 2800000, guid: e34c2999af337c94fbec24a3378ed777, type: 3}
   sceneNameOLD: 
 --- !u!114 &591513309
 MonoBehaviour:

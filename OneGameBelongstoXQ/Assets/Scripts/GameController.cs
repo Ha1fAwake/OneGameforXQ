@@ -36,6 +36,7 @@ public class GameController : MonoBehaviour
 
     private int currentLevelId;
     private bool isLevelUp = true;
+    private bool hasAddedMovingPlat = false;
 
     // 重新加载场景会调用Awake和Start函数
     private void Awake()
@@ -92,6 +93,21 @@ public class GameController : MonoBehaviour
         if (player != null && reward != null)
         {
             start = true;
+
+            if (currentLevelId > 3 && !hasAddedMovingPlat)  // 关卡三以上，且尚未添加组件
+            {
+                GameObject[] platforms;
+                platforms = GameObject.FindGameObjectsWithTag("Platform");
+                foreach(GameObject platform in platforms)
+                {
+                    platform.AddComponent<MovingPlatform>();
+                    if (currentLevelId == 4)
+                        platform.GetComponent<MovingPlatform>().speed = 1f;
+                    if (currentLevelId > 4)
+                        platform.GetComponent<MovingPlatform>().speed = 2f;
+                }
+                hasAddedMovingPlat = true;
+            }
         }
     }
 
@@ -149,11 +165,11 @@ public class GameController : MonoBehaviour
         // 更新关卡奖励
         GetComponent<Generator>().reward = rewardList[levelData.LevelId - 1];   // levelID比列表下标多1位
         isLevelUp = false;
+        hasAddedMovingPlat = false;
     }
 
     private void LevelUp()
     {// 升级
-        Debug.Log("Level Up");
         // 更新json文件
         levelDatas_list[0].CurrentLevel++;
         levelDatas_json = JsonConvert.SerializeObject(levelDatas_list, Formatting.Indented);

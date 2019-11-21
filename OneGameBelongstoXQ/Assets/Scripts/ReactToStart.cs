@@ -12,8 +12,6 @@ public class ReactToStart : MonoBehaviour
     private void OnMouseDown()
     {
         if (!flowchart.HasExecutingBlocks())
-        {
             flowchart.ExecuteBlock("First");
-        }
     }
 }
