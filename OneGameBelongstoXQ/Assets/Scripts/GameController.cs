@@ -55,7 +55,7 @@ public class GameController : MonoBehaviour
 
         GameObject reward = GameObject.FindGameObjectWithTag("Reward");
         if (reward != null && reward.GetComponent<LevelUp>().sendLevelUp)
-            LevelUp();
+            Invoke("LevelUp", 0.8f);
     }
 
     public void OpenControlBoard()

@@ -12,6 +12,9 @@ public class PlayerController : MonoBehaviour
     public float jumpIncrement = 1.5f;
     public float maxJumpHeight = 2f;
 
+    public AudioClip damage;
+    public AudioClip jump;
+
     private MyScrollRect scrollRect;
     private MyJumpButton jumpButton;
     private Rigidbody2D rgb;
@@ -47,7 +50,9 @@ public class PlayerController : MonoBehaviour
         // 跳跃
         if (jumpButton.isDown && !releaseWhenFloat)     // 当跳跃键按下且没有在半空中松开
             if (transform.position.y - currentPositionY <= maxJumpHeight)
+            {
                 rgb.velocity = new Vector2(rgb.velocity.x, rgb.velocity.y + jumpIncrement);     // 用AddForce很难实现跳跃的迸发力
+            }
 
         if (!isOnPlatform)
             if (!jumpButton.isDown)         // 若在半空中且松开按键
@@ -57,7 +62,11 @@ public class PlayerController : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Trap")
+        {
             Invoke("Replay", 0.2f);
+            AudioSource.PlayClipAtPoint(damage, transform.position);
+        }
+
         if (collision.gameObject.tag == "Platform")
         {
             isOnPlatform = true;
@@ -69,7 +78,11 @@ public class PlayerController : MonoBehaviour
     private void OnCollisionExit2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Platform")
+        {
             isOnPlatform = false;
+            if (jumpButton.isDown)
+                AudioSource.PlayClipAtPoint(jump, transform.position);
+        }
     }
 
     private void Replay()

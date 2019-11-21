@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 5565834820473159741}
   - component: {fileID: 5565834820473159740}
   m_Layer: 5
-  m_Name: CustomedSayDialog
+  m_Name: CustomSayDialog
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -248,7 +248,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4782cf42f2644447b9631f6e522160b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  volume: 1
+  volume: 0.3
   loop: 1
   targetAudioSource: {fileID: 0}
   audioMode: 0
@@ -272,7 +272,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   clickMode: 3
   nextClickDelay: 0.1
-  cancelEnabled: 1
+  cancelEnabled: 0
   ignoreMenuClicks: 1
 --- !u!82 &5565834820473159740
 AudioSource:

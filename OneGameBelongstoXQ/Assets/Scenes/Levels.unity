@@ -1198,7 +1198,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 0b6d30e34b1fd7e44846ddb4c819fe77, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.2
+  m_Volume: 0.08
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -1868,6 +1868,7 @@ MonoBehaviour:
   itemsBoard: {fileID: 1619834219}
   trapNumText: {fileID: 117147017}
   platformText: {fileID: 582964105}
+  layout: {fileID: 8300000, guid: 8aa1400dd3d2b864298cf80f76e2b43e, type: 3}
 --- !u!4 &658500574
 Transform:
   m_ObjectHideFlags: 0
@@ -2544,7 +2545,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: S
+  m_Text: Q
 --- !u!222 &1116157768
 CanvasRenderer:
   m_ObjectHideFlags: 0

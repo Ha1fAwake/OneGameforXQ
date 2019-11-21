@@ -20,6 +20,8 @@ public class Generator : MonoBehaviour
     public Text trapNumText;            // 陷阱剩余数量
     public Text platformText;           // 平台剩余数量
 
+    public AudioClip layout;
+
     private int timer = 0;                  // 触屏次数
     private int timeToGeneratePlayer = 2;   // 生成玩家的时机
     private int timeToGenerateReward = 2;   // 生成奖励的时机
@@ -102,12 +104,16 @@ public class Generator : MonoBehaviour
         if (timer == timeToGenerateReward)
             toGenerate = reward;
         if (toGenerate == player || toGenerate == reward)
+        {
             Instantiate(toGenerate, generatePosition, Quaternion.identity);
+            AudioSource.PlayClipAtPoint(layout, transform.position);
+        }
         if (toGenerate == layouts[0] || toGenerate == layouts[1])
         {
             if (trapCounter >= GameController.trapNum && platformCounter >= GameController.platformNum)
                 return;     // 不能继续生成
             Instantiate(toGenerate, generatePosition, Quaternion.identity);
+            AudioSource.PlayClipAtPoint(layout, transform.position);
         }
         // 在UI显示剩余陷阱和平台的数量
         if (toGenerate == layouts[0])

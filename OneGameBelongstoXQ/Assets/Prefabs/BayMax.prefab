@@ -112,6 +112,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sendLevelUp: 0
+  reward: {fileID: 8300000, guid: 1662b12e94b1c3646a61d9ce71372bd2, type: 3}
 --- !u!1 &6716657577696126235
 GameObject:
   m_ObjectHideFlags: 0
