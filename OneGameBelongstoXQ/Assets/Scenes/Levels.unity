@@ -1923,6 +1923,7 @@ MonoBehaviour:
   - {fileID: 423444873}
   - {fileID: 714157671}
   - {fileID: 555485772}
+  json: {fileID: 4900000, guid: 9707e0b358e71aa4eb3b1ba818427549, type: 3}
   currentLevelId: 0
 --- !u!1 &707104060
 GameObject:

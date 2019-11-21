@@ -44,7 +44,7 @@ public class GameController : MonoBehaviour
         start = false;
         isLevelUp = true;
         levelDatas_list.Clear();
-        levelDatas_json = File.ReadAllText(Application.dataPath + "/LevelDatas.json");
+        levelDatas_json = File.ReadAllText(Application.persistentDataPath + "/Resources/LevelDatas.json");
         levelDatas_list = JsonConvert.DeserializeObject<List<LevelData>>(levelDatas_json);
         UpdateLevelData();
     }
@@ -177,7 +177,7 @@ public class GameController : MonoBehaviour
         // 更新json文件
         levelDatas_list[0].CurrentLevel++;
         levelDatas_json = JsonConvert.SerializeObject(levelDatas_list, Formatting.Indented);
-        File.WriteAllText(Application.dataPath + "/LevelDatas.json", levelDatas_json);
+        File.WriteAllText(Application.persistentDataPath + "/Resources/LevelDatas.json", levelDatas_json);
         // 重新加载场景
         SceneManager.LoadScene(1);
     }

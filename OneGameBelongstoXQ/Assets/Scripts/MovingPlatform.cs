@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/// <summary>
+/// 祝薛芹生日快乐！—— 来自wxx的祝福
+/// </summary>
 public class MovingPlatform : MonoBehaviour
 {
     public float speed = 2f;    // 慢1快2
