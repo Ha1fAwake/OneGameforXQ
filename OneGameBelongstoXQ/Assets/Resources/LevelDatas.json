@@ -4,41 +4,35 @@
     "LevelId": 1,
     "TrapNum": 0,
     "Platform": 3,
-    "CurrentLevel": 2
   },
   {
     "Level": "Level_2：11月19日",
     "LevelId": 2,
     "TrapNum": 4,
     "Platform": 3,
-    "CurrentLevel": 1
   },
   {
     "Level": "Level_3：11月20日",
     "LevelId": 3,
     "TrapNum": 7,
     "Platform": 3,
-    "CurrentLevel": 1
   },
   {
     "Level": "Level_4：11月21日",
     "LevelId": 4,
     "TrapNum": 5,
     "Platform": 4,
-    "CurrentLevel": 1
   },
   {
     "Level": "Level_5：11月22日",
     "LevelId": 5,
     "TrapNum": 6,
     "Platform": 4,
-    "CurrentLevel": 1
   },
   {
     "Level": "Level_6：11月23日",
     "LevelId": 6,
     "TrapNum": 4,
     "Platform": 4,
-    "CurrentLevel": 1
   }
 ]

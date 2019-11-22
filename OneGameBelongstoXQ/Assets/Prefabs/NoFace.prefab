@@ -62,7 +62,7 @@ GameObject:
   - component: {fileID: 788067277270818790}
   m_Layer: 0
   m_Name: NoFace
-  m_TagString: Trap
+  m_TagString: Noface
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -155,7 +155,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8013962247079419707}
-  m_BodyType: 2
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0

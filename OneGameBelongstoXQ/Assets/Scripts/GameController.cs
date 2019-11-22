@@ -28,12 +28,15 @@ public class GameController : MonoBehaviour
     public List<GameObject> rewardList = new List<GameObject>();
     public List<GameObject> slots = new List<GameObject>();
 
+    public TextAsset json;
+
     private GameObject player;
     private GameObject reward;
 
     private string levelDatas_json;
     private List<LevelData> levelDatas_list = new List<LevelData>();
 
+    [HideInInspector]
     public int currentLevelId;
     private bool isLevelUp = true;
     private bool hasAddedMovingPlat = false;
@@ -44,7 +47,8 @@ public class GameController : MonoBehaviour
         start = false;
         isLevelUp = true;
         levelDatas_list.Clear();
-        levelDatas_json = File.ReadAllText(Application.persistentDataPath + "/Resources/LevelDatas.json");
+        //levelDatas_json = File.ReadAllText(Application.dataPath + "/Resources/LevelDatas.json");
+        levelDatas_json = json.text;
         levelDatas_list = JsonConvert.DeserializeObject<List<LevelData>>(levelDatas_json);
         UpdateLevelData();
     }
@@ -157,14 +161,16 @@ public class GameController : MonoBehaviour
             delegate (LevelData match)
             {
                 // 修改关卡只需要修改第一个信息的CurrentLevel
-                return match.LevelId == levelDatas_list[0].CurrentLevel;
+                //return match.LevelId == levelDatas_list[0].CurrentLevel;
+                return match.LevelId == CurrentLevelID.currentLevelId;
             });
         levelShow.text = levelData.Level;
         trapNumText.text = levelData.TrapNum.ToString();
         platformText.text = levelData.Platform.ToString();
         trapNum = levelData.TrapNum;
         platformNum = levelData.Platform;
-        currentLevelId = levelData.LevelId;
+        //currentLevelId = levelData.LevelId;
+        currentLevelId = CurrentLevelID.currentLevelId;
         // 更新关卡奖励
         GetComponent<Generator>().reward = rewardList[levelData.LevelId - 1];   // levelID比列表下标多1位
         isLevelUp = false;
@@ -175,9 +181,10 @@ public class GameController : MonoBehaviour
     private void LevelUp()
     {// 升级
         // 更新json文件
-        levelDatas_list[0].CurrentLevel++;
-        levelDatas_json = JsonConvert.SerializeObject(levelDatas_list, Formatting.Indented);
-        File.WriteAllText(Application.persistentDataPath + "/Resources/LevelDatas.json", levelDatas_json);
+        //levelDatas_list[0].CurrentLevel++;
+        //levelDatas_json = JsonConvert.SerializeObject(levelDatas_list, Formatting.Indented);
+        //File.WriteAllText(Application.dataPath + "/Resources/LevelDatas.json", levelDatas_json);
+        CurrentLevelID.currentLevelId++;
         // 重新加载场景
         SceneManager.LoadScene(1);
     }
@@ -185,19 +192,19 @@ public class GameController : MonoBehaviour
 
 public class LevelData
 {
-    public LevelData(string level, int levelId, int trapNum, int platform, int currentLevel)
+    public LevelData(string level, int levelId, int trapNum, int platform)
     {
         Level = level;
         LevelId = levelId;
         TrapNum = trapNum;
         Platform = platform;
-        CurrentLevel = currentLevel;
+        //CurrentLevel = currentLevel;
     }
 
     public string Level { get; set; }
     public int LevelId { get; set; }
     public int TrapNum { get; set; }
     public int Platform { get; set; }
-    public int CurrentLevel { get; set; }
+    //public int CurrentLevel { get; set; }
 
 }

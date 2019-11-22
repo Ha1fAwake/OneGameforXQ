@@ -54,16 +54,26 @@ public class PlayerController : MonoBehaviour
         if (Mathf.Abs(scrollRect.output.x) > 0)
             if (Mathf.Abs(rgb.velocity.x) <= maxSpeed)
                 rgb.AddForce(new Vector2(scrollRect.output.x, 0).normalized * moveForce);
+        if (scrollRect.output.x < 0)
+            transform.rotation = Quaternion.Euler(0, 180, 0);
+        if(scrollRect.output.x>0)
+            transform.rotation = Quaternion.Euler(0, 0, 0);
         if (scrollRect.output.x == 0)
             rgb.velocity = new Vector2(0, rgb.velocity.y);
 
         // 电脑端测试用的键盘移动输入
         if(Input.GetKey(KeyCode.A))
             if (Mathf.Abs(rgb.velocity.x) <= maxSpeed)
+            {
                 rgb.AddForce(new Vector2(-1f, 0) * moveForce * 5);
-        if(Input.GetKey(KeyCode.D))
+                transform.rotation = Quaternion.Euler(0, 180, 0);
+            }
+        if (Input.GetKey(KeyCode.D))
             if (Mathf.Abs(rgb.velocity.x) <= maxSpeed)
+            {
                 rgb.AddForce(new Vector2(1f, 0) * moveForce * 5);
+                transform.rotation = Quaternion.Euler(0, 0, 0);
+            }
 
         // 跳跃
         if (jumpButton.isDown && !releaseWhenFloat)     // 当跳跃键按下且没有在半空中松开
@@ -86,7 +96,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Trap")
+        if (collision.gameObject.tag == "Trap" || collision.gameObject.tag == "Noface")
         {
             isDead = true;
             Invoke("Replay", 0.2f);
@@ -111,7 +121,7 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.tag == "Platform")
         {
             isOnPlatform = false;
-            if (jumpButton.isDown)
+            if (jumpButton.isDown || Input.GetKeyDown(KeyCode.W))
                 AudioSource.PlayClipAtPoint(jump, transform.position);
         }
     }

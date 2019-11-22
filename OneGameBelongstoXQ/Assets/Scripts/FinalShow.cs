@@ -15,6 +15,8 @@ public class FinalShow : MonoBehaviour
         {
             Camera.main.GetComponent<AudioSource>().volume = 0;
             AudioSource.PlayClipAtPoint(gameClear, transform.position);
+            GameObject noface = GameObject.FindGameObjectWithTag("Noface");
+            Destroy(noface);
             Invoke("LoadLastScene", 6.5f);
         }
     }
