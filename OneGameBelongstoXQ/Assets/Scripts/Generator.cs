@@ -47,7 +47,7 @@ public class Generator : MonoBehaviour
         while (timeToGeneratePlayer == timeToGenerateReward)
         {
             timeToGeneratePlayer = Random.Range(minCount, gameController.platformNum + 1);
-            timeToGenerateReward = Random.Range(minCount, maxCount + 1);
+            timeToGenerateReward = Random.Range(gameController.platformNum, maxCount + 1);
         }
 
         if (gameController.currentLevelId == 6)

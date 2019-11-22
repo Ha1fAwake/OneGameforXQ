@@ -191,10 +191,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveForce: 13
-  maxSpeed: 1.2
+  maxSpeed: 1.4
   jumpForce: 0.1
   jumpIncrement: 1
-  maxJumpHeight: 0.35
+  maxJumpHeight: 0.3
   damage: {fileID: 8300000, guid: 407706b846a8c23498120259d6cda0b2, type: 3}
   jump: {fileID: 8300000, guid: 03b0f2a078338894b8187a7453ba7a2b, type: 3}
   isDead: 0
