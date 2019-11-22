@@ -58,7 +58,7 @@ GameObject:
   - component: {fileID: 4164967079624380301}
   - component: {fileID: 4164967079624380290}
   - component: {fileID: 5300016688601881069}
-  - component: {fileID: 8720122109098870226}
+  - component: {fileID: 8007970806010196834}
   - component: {fileID: 8842272356399432034}
   m_Layer: 8
   m_Name: Player
@@ -144,7 +144,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.5929898, y: -0.15034199}
+  m_Offset: {x: 0.5929898, y: -0.17916977}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -155,9 +155,9 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.4140203, y: 1.029316}
+  m_Size: {x: 1.4140203, y: 1.0034854}
   m_EdgeRadius: 0
---- !u!50 &8720122109098870226
+--- !u!50 &8007970806010196834
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0
@@ -190,10 +190,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0eed0fafaa379d6458d003c644eb0763, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveForce: 20
-  maxSpeed: 5
+  moveForce: 13
+  maxSpeed: 1.2
   jumpForce: 0.1
   jumpIncrement: 1
   maxJumpHeight: 0.35
   damage: {fileID: 8300000, guid: 407706b846a8c23498120259d6cda0b2, type: 3}
   jump: {fileID: 8300000, guid: 03b0f2a078338894b8187a7453ba7a2b, type: 3}
+  isDead: 0

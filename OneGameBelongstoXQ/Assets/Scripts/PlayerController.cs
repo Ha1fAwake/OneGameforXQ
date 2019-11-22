@@ -4,6 +4,7 @@ using UnityEngine;
 /// <summary>
 /// 祝薛芹生日快乐！—— 来自wxx的祝福
 /// </summary>
+[RequireComponent(typeof(Rigidbody2D))]
 public class PlayerController : MonoBehaviour
 {// 角色（罗小黑）控制器
     public float moveForce = 20f;
@@ -30,8 +31,8 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         scrollRect = GameObject.Find("VirtualJoystick").GetComponent<MyScrollRect>();
-        jumpButton = GameObject.Find("Start").GetComponent<MyJumpButton>();
-        rgb = GetComponent<Rigidbody2D>();
+        jumpButton = GameObject.Find("StartNJump").GetComponent<MyJumpButton>();
+        rgb = this.GetComponent<Rigidbody2D>();
         startPosition = transform.position;
     }
 
@@ -81,7 +82,7 @@ public class PlayerController : MonoBehaviour
                 rgb.velocity = new Vector2(rgb.velocity.x, rgb.velocity.y + jumpIncrement);     // 用AddForce很难实现跳跃的迸发力
 
         if (!isOnPlatform)
-            if (!jumpButton.isDown)         // 若在半空中且松开按键
+            if (!jumpButton.isDown || transform.position.y - currentPositionY >= maxJumpHeight / 2)         // 若在半空中且松开按键
                 releaseWhenFloat = true;    // 记录下来
 
         // 电脑端测试用的键盘跳跃输入
