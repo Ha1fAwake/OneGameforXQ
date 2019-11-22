@@ -30,6 +30,8 @@ public class GameController : MonoBehaviour
 
     public TextAsset json;
 
+    public GameObject gameplay;
+
     private GameObject player;
     private GameObject reward;
     private GameObject noface;
@@ -89,6 +91,11 @@ public class GameController : MonoBehaviour
         SceneManager.LoadScene(1);
         if (controlBoard.activeInHierarchy == true)
             controlBoard.SetActive(false);
+    }
+
+    public void OnHelp()
+    {
+        gameplay.SetActive(!gameplay.activeInHierarchy);
     }
 
     public void OnStart()
