@@ -32,6 +32,7 @@ public class GameController : MonoBehaviour
 
     private GameObject player;
     private GameObject reward;
+    private GameObject noface;
 
     private string levelDatas_json;
     private List<LevelData> levelDatas_list = new List<LevelData>();
@@ -62,7 +63,10 @@ public class GameController : MonoBehaviour
         {
             GameObject reward = GameObject.FindGameObjectWithTag("Reward");
             if (reward != null && reward.GetComponent<LevelUp>().sendLevelUp)
-                Invoke("LevelUp", 3.1f);
+            {
+                reward.GetComponent<LevelUp>().sendLevelUp = false;
+                Invoke("LevelUp", 3.1f);    // 可能是这段延迟时间内的重复触发导致跳关
+            }
         }
     }
 
@@ -89,31 +93,62 @@ public class GameController : MonoBehaviour
 
     public void OnStart()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
-        reward = GameObject.FindGameObjectWithTag("Reward");
-
-        if (player == null || reward == null)
+        if (currentLevelId < 6)
         {
-            AudioSource.PlayClipAtPoint(cantStart, transform.position);
-        }
+            player = GameObject.FindGameObjectWithTag("Player");
+            reward = GameObject.FindGameObjectWithTag("Reward");
 
-        if (player != null && reward != null)
-        {
-            start = true;
-
-            if (currentLevelId > 3 && !hasAddedMovingPlat)  // 关卡三以上，且尚未添加组件
+            if (player == null || reward == null)
             {
-                GameObject[] platforms;
-                platforms = GameObject.FindGameObjectsWithTag("Platform");
-                foreach(GameObject platform in platforms)
+                AudioSource.PlayClipAtPoint(cantStart, transform.position);
+            }
+
+            if (player != null && reward != null)
+            {
+                start = true;
+
+                if (currentLevelId > 3 && !hasAddedMovingPlat)  // 关卡三以上，且尚未添加组件
                 {
-                    platform.AddComponent<MovingPlatform>();
-                    if (currentLevelId == 4)
-                        platform.GetComponent<MovingPlatform>().speed = 1f;
-                    if (currentLevelId > 4)
-                        platform.GetComponent<MovingPlatform>().speed = 2f;
+                    GameObject[] platforms;
+                    platforms = GameObject.FindGameObjectsWithTag("Platform");
+                    foreach (GameObject platform in platforms)
+                    {
+                        platform.AddComponent<MovingPlatform>();
+                        if (currentLevelId == 4)
+                            platform.GetComponent<MovingPlatform>().speed = 1f;
+                        if (currentLevelId > 4)
+                            platform.GetComponent<MovingPlatform>().speed = 2f;
+                    }
+                    hasAddedMovingPlat = true;
                 }
-                hasAddedMovingPlat = true;
+            }
+        }
+        else if (currentLevelId == 6)
+        {
+            player = GameObject.FindGameObjectWithTag("Player");
+            reward = GameObject.FindGameObjectWithTag("Reward");
+            noface = GameObject.FindGameObjectWithTag("Noface");
+
+            if (player == null || reward == null || noface == null)
+            {
+                AudioSource.PlayClipAtPoint(cantStart, transform.position);
+            }
+
+            if (player != null && reward != null && noface != null)
+            {
+                start = true;
+
+                if (!hasAddedMovingPlat)  // 关卡三以上，且尚未添加组件
+                {
+                    GameObject[] platforms;
+                    platforms = GameObject.FindGameObjectsWithTag("Platform");
+                    foreach (GameObject platform in platforms)
+                    {
+                        platform.AddComponent<MovingPlatform>();
+                        platform.GetComponent<MovingPlatform>().speed = 2f;
+                    }
+                    hasAddedMovingPlat = true;
+                }
             }
         }
     }
